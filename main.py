@@ -27,17 +27,34 @@ def search_by_name(name):
             print('\n','=-'*20, '\n')
             return 
 
-    print("Not found")     
+    print("Not found".center(40))     
+    print('\n','=-'*20, '\n')
 
 
 def  search_by_type(t1, t2):
-    print('\n','-'*40,)
-    print("Type".center(40),'\n')
+    print('\n','-'*40)
+    print("Type".center(40))
+
+    if t1=='' and t2 =='':
+        print("None type selected".center(40))
+        return
+
+ 
+    accumulator = 0
     for pokemon_groupy in pokedex151:
         if t2 == '':
             if t1 in pokemon_groupy["Type1"]:
                 print(f"  //{pokemon_groupy['Name']}", end=' // ')
-    print('\n')
+                accumulator +=1
+         
+        else:
+            if t1 in pokemon_groupy.values() and t2 in pokemon_groupy.values():
+                print(f"  //{pokemon_groupy['Name']}", end=' // ')
+                accumulator +=1
+
+    return accumulator
+
+    
     
 
     
@@ -50,13 +67,14 @@ while True:
     if option =="1":
         name = input("What Pokémon?: ")
         os.system("cls")
-        search_by_name(name.upper())
+        search_by_name(name.upper().strip())
 
     if option == "2":
-        type1 = input("what type1: ").upper()
-        type2 = input("what type2: ").upper()
+        type1 = input("what type1: ").upper().strip()
+        type2 = input("what type2: ").upper().strip()
         os.system("cls")
-        search_by_type(type1, type2)
+        founds = search_by_type(type1, type2)
+        print(f"\n \n {founds} Pokémons found !! \n")
 
 
     if option == "7":
