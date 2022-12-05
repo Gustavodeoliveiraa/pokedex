@@ -23,7 +23,8 @@ def langue():
     print('-'*40)
     print("What your langue? Default = English ")
     print("[1] English\n[2] Japanese\n[3] chinese\n[4] french")
-    lang = input("Input:")
+    lang = input("Input: ")
+    os.system("cls")
     if lang =="1":
         return "english"
 
@@ -35,10 +36,10 @@ def langue():
 
     elif lang =="4":
         return "french"
-
+    
     else:
+        print("Invalid Option\nEnglish  defined")
         return "english"
-
 
 
 def search_by_name(p1, lang='english'):
@@ -51,7 +52,8 @@ def search_by_name(p1, lang='english'):
                 print(f"\t{'ID Num':<10} {group['id']}")
                 if lang != "english":
                      print(f"\t{'Name':<10} {group['name'][lang]} //English: {group['name']['english']}//")
-                print(f"\t{'Name':<10} {group['name'][lang]} ")
+                else:
+                    print(f"\t{'Name':<10} {group['name'][lang]} ")
                 print(f"\t{'Type':<10}" ,*group['type'], sep=' // ')
         return
     print("Not Found !")
@@ -89,7 +91,7 @@ os.system("cls")
 lang = langue()
 
 while True: 
-    os.system("cls")
+    
     menu()
     option = input("Input: ")
     
@@ -107,6 +109,7 @@ while True:
         print(f"\n \n {founds} Pokémons found !! \n")
 
     if option == "7":
+        os.system("cls")
         lang = langue()
 
 
