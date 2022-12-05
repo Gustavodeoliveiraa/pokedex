@@ -1,5 +1,9 @@
-from pokedex import *
 import os
+import json
+
+with open('pokedex.json', encoding='utf8') as file:
+    pokedex151 = json.load(file)
+
 
 def menu():
     print('-'*40)
@@ -9,26 +13,49 @@ def menu():
     print(f"{'list by Name':<20}(4)")
     print(f"{'list by Number':<20}(5)")
     print(f"{'Add/Edit Pokémon':<20}(6)")
-    print(f"{'Exit':<20}(7)")
+    print(f"{'Setting langue':<20}(7)")
+    print(f"{'Exit':<20}(8)")
     print('-'*40)
     print
 
 
-def search_by_name(name):
-    print('\n','=-'*20, '\n')
+def langue():
+    print('-'*40)
+    print("What your langue? Default = English ")
+    print("[1] English\n[2] Japanese\n[3] chinese\n[4] french")
+    lang = input("Input:")
+    if lang =="1":
+        return "english"
 
-    for pokemon_groupy in pokedex151:
-        if name == None:
-            break
+    elif lang =="2":
+        return "japanese"
 
-        if name  in pokemon_groupy.values():
-            for key, value in pokemon_groupy.items():
-                print(f'    {key:<20} {value}')
-            print('\n','=-'*20, '\n')
-            return 
+    elif lang =="3":
+        return "chinese"
 
-    print("Not found".center(40))     
-    print('\n','=-'*20, '\n')
+    elif lang =="4":
+        return "french"
+
+    else:
+        return "english"
+
+
+
+def search_by_name(p1, lang='english'):
+    print('\n','=-'*20,)
+    print("information's\n".center(40))
+
+    if p1!="":
+        for group in pokedex151:
+            if p1 in group['name'].values():
+                print(f"\t{'ID Num':<10} {group['id']}")
+                if lang != "english":
+                     print(f"\t{'Name':<10} {group['name'][lang]} //English: {group['name']['english']}//")
+                print(f"\t{'Name':<10} {group['name'][lang]} ")
+                print(f"\t{'Type':<10}" ,*group['type'], sep=' // ')
+        return
+    print("Not Found !")
+                
 
 
 def  search_by_type(t1, t2):
@@ -41,15 +68,15 @@ def  search_by_type(t1, t2):
 
  
     accumulator = 0
-    for pokemon_groupy in pokedex151:
+    for pokemon_group in pokedex151:
         if t2 == '':
-            if t1 in pokemon_groupy["Type1"]:
-                print(f"  //{pokemon_groupy['Name']}", end=' // ')
+            if t1 in pokemon_group["Type1"]:
+                print(f"  //{pokemon_group['Name']}", end=' // ')
                 accumulator +=1
          
         else:
-            if t1 in pokemon_groupy.values() and t2 in pokemon_groupy.values():
-                print(f"  //{pokemon_groupy['Name']}", end=' // ')
+            if t1 in pokemon_group.values() and t2 in pokemon_group.values():
+                print(f"  //{pokemon_group['Name']}", end=' // ')
                 accumulator +=1
 
     return accumulator
@@ -58,16 +85,19 @@ def  search_by_type(t1, t2):
     
 
     
-        
+os.system("cls")  
+lang = langue()
 
 while True: 
+    os.system("cls")
     menu()
     option = input("Input: ")
     
     if option =="1":
+        
         name = input("What Pokémon?: ")
         os.system("cls")
-        search_by_name(name.upper().strip())
+        search_by_name(name.capitalize().strip(), lang)
 
     if option == "2":
         type1 = input("what type1: ").upper().strip()
@@ -76,8 +106,11 @@ while True:
         founds = search_by_type(type1, type2)
         print(f"\n \n {founds} Pokémons found !! \n")
 
-
     if option == "7":
+        lang = langue()
+
+
+    if option == "8":
         exit = input("Confirm exit [Y] or [N]: ").lower()
         if exit == "y":
             break
