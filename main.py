@@ -15,13 +15,13 @@ def menu():
         ("[ 4 ]  Setting langue"),
         ("[ 5 ]  Exit")]
 
-def set_langue():
-    print('-'*40)
-    print("What your langue? Default = English ")
-    print("[1] English\n[2] Japanese\n[3] French ")
-    num = input("Input: ")
+# def set_langue():
+#     print('-'*40)
+#     print("What your langue? Default = English ")
+#     print("[1] English\n[2] Japanese\n[3] French ")
+#     num = input("Input: ")
   
-def translate_menu(func, lang="ja"):
+def translate_menu(func, lang="en"):
     translation = Translator()
     for items in func():
         print(translation.translate(items, lang).text)
@@ -143,7 +143,7 @@ while True:
         search_by_id(id_num, lang)
 
     if option == "4":
-        os.system("cls")
+        set_lang()
         
 
     if option == "5":
