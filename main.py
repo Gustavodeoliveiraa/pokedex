@@ -140,7 +140,7 @@ while True:
     if option == "3":
         id_num = input("Number: ")
         os.system("cls")
-        search_by_id(id_num, lang)
+        search_by_id(id_num, lang_in_json)
 
     if option == "4":
         set_lang()
