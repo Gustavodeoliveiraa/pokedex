@@ -9,24 +9,25 @@ with open('pokedex.json', encoding='utf8') as file:
 
 def menu():
     
-    return [("[ 1 ]  Search by Name"),
-        ("[ 2 ]  Search by Type"),
-        ("[ 3 ]  Search by Number"),
-        ("[ 4 ]  Setting langue"),
-        ("[ 5 ]  Exit")]
+    return ["[ 1 ]  Search by Name",
+        "[ 2 ]  Search by Type",
+        "[ 3 ]  Search by Number",
+        "[ 4 ]  Setting langue",
+        "[ 5 ]  Exit"]
 
-# def set_langue():
-#     print('-'*40)
-#     print("What your langue? Default = English ")
-#     print("[1] English\n[2] Japanese\n[3] French ")
-#     num = input("Input: ")
+def set_langue():
+     print('-'*40)
+     print("What your langue? Default = English ")
+     print("[1] English\n[2] Japanese\n[3] French ")
+     num = input("Input: ")
+     return num
   
 def translate_menu(func, lang="en"):
     translation = Translator()
     for items in func():
         print(translation.translate(items, lang).text)
 
-    return lang
+
     
 
 def  initials_by_name(var):
@@ -39,9 +40,19 @@ def  initials_by_name(var):
     elif var== "fr":
         return "french"
 
+
+def test_initials_by_name(var="1"):
+    if var ==  "1":
+        return "en"
+
+    elif var== "2":
+        return "ja"
+
+    elif var== "3":
+        return "fr"
    
 
-def search_by_name(name, lang='english'):
+def search_by_name(name, lang):
     print('\n','=-'*20,)
     print("information's\n".center(40))
 
@@ -111,11 +122,15 @@ def translate_word(var, lang):
     
 os.system("cls")  
 
+def return_lang(var):
+    return var
+
+lang = test_initials_by_name()
 
 while True: 
 
     print("-"*40)
-    lang = translate_menu(menu)
+    translate_menu(menu, lang)
     
     lang_in_json = initials_by_name(lang)
 
@@ -128,7 +143,7 @@ while True:
         
         name = input("What Pokémon?: ")
         os.system("cls")
-        search_by_name(name.capitalize().strip(), lang_in_json)
+        search_by_name(name.capitalize().strip(), initials_by_name(lang))
 
     if option == "2":
         type1 = input("what primary type: ").capitalize().strip()
@@ -143,7 +158,10 @@ while True:
         search_by_id(id_num, lang_in_json)
 
     if option == "4":
-        set_lang()
+        os.system("cls")
+        lang_set = set_langue()
+        lang = test_initials_by_name(lang_set)
+        os.system("cls")
         
 
     if option == "5":
