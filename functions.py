@@ -86,7 +86,7 @@ def search_by_name(name, lang, traduction):
     print("Not Found !")
                 
 
-
+#ãp está sendo traduzido 
 def search_by_type(t1, t2):
     print('\n','-'*40)
     print("Type".center(40))
@@ -100,7 +100,7 @@ def search_by_type(t1, t2):
     for pokemon_group in pokedex151:
         
         if t2 == '':
-            if t1 in pokemon_group["type"]: 
+            if t1 in pokemon_group["type"]:           ###
                 print(f"  // {pokemon_group['name']['english']}", end='// ')
                 accumulator +=1
                 c += 1
@@ -115,7 +115,7 @@ def search_by_type(t1, t2):
                 accumulator +=1
 
     return accumulator
-
+#náo está sendo traduzido
 def search_by_id(var,lang):
     try: 
         num = int(var)
